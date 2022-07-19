@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "MindBoxSobes": {
+      "commandName": "Project"
+    },
+    "MindBoxMain": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\vladislav\\source\\repos\\MindBoxSobes\\MindBoxMain\\Program.cs"
+    }
+  }
+}
