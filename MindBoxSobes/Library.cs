@@ -41,12 +41,12 @@
 
         enum TriangleType
         {
-            Equilateral,
-            Isosceles,
-            Scalene,
-            Right,
-            Obtuse,
-            Acute
+            равносторонний,
+            равнобедренный,
+            острый,
+            прямоугольный,
+            тупой,
+            неравносторонний
         }
 
         TriangleType triType;
@@ -65,60 +65,58 @@
             this.sideB = sideB;
             this.sideC = sideC;
             computeTriangleEdges();
-            //computeTriangleType();
-            //computeSquare();
+            computeTriangleType();
+            computeSquare();
         }
         public void computeTriangleEdges()
         {
-            edgeBC = Math.Acos((sideB * sideB + sideC * sideC - sideA * sideA) / (2 * sideC * sideB));
-            edgeAB = Math.Acos((sideB * sideB + sideA * sideA - sideC * sideC) / (2 * sideA * sideB));
+
+            edgeBC = (180.0 / Math.PI)*Math.Acos((sideB * sideB + sideC * sideC - sideA * sideA) / (2 * sideC * sideB));
+            edgeAB = (180.0 / Math.PI)*Math.Acos((sideB * sideB + sideA * sideA - sideC * sideC) / (2 * sideA * sideB));
             edgeCA = 180 - (edgeBC + edgeAB);
         }
 
-        public void printEdgesAndSides()
+        public void printTriangle()
         {
-            Console.WriteLine($"углы AB={edgeAB}, BC={edgeBC} ,CA={edgeCA}", edgeAB, edgeBC, edgeCA);
+            Console.WriteLine($"стороны A={sideA}, B={sideB} ,C={sideC}");
+            Console.WriteLine($"углы AB={edgeAB}, BC={edgeBC} ,CA={edgeCA}");
+            Console.WriteLine($"тип: {triType}");
+            Console.WriteLine($"площадь: {Square}");
         }
 
 
         public void computeTriangleType()
         {
-        
+            if(edgeBC==90||edgeAB==90||edgeCA==90)
+            {
+                triType=TriangleType.прямоугольный;
+            }
+             else if(edgeBC==edgeAB||edgeCA==edgeAB||edgeCA==edgeBC)
+            {
+                triType=TriangleType.равнобедренный;
+            }
+            else if(edgeBC==edgeAB&&edgeCA==edgeAB)
+            {
+                triType=TriangleType.равносторонний;
+            }
+            else if(edgeBC>90||edgeAB>90||edgeCA>90)
+            {
+                triType=TriangleType.тупой;
+            }
+            else if(edgeBC<90&&edgeAB<90&&edgeCA<90)
+            {
+                triType=TriangleType.острый;
+            }
+            else
+            {
+                triType=TriangleType.неравносторонний;
+            }
         }
 
         public override void computeSquare()
         {
-            // Square = Math.PI * Radius * Radius;
-            switch (triType)
-            {
-                case TriangleType.Equilateral:
-                    
-                break;
-
-                case TriangleType.Isosceles:
-
-                break;
-
-                case TriangleType.Scalene:
-
-                break;
-
-                case TriangleType.Right:
-
-                break;
-
-                case TriangleType.Obtuse:
-
-                break;
-
-                case TriangleType.Acute:
-
-                break;
-
-                default:
-                    Console.WriteLine("что то не так");
-                break;
-            }
+                double poluper=0.5*(sideA+sideB+sideC);
+                Square=Math.Sqrt(poluper*(poluper-sideA)*(poluper-sideB)*(poluper-sideC));
         }
 
         
