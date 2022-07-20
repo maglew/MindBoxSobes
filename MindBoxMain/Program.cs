@@ -4,7 +4,7 @@ class Program
 {
  static Circle circle = new Circle(3);
 
-    static Triangle triangle = new Triangle(5,2.757,4.625);
+    static Triangle triangle = new Triangle(7,2,8);
     static void Main(string[] args)
     {
         //Console.WriteLine("Площать круга :" + circle.square);

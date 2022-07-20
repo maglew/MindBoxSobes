@@ -72,7 +72,7 @@
         {
             edgeBC = Math.Acos((sideB * sideB + sideC * sideC - sideA * sideA) / (2 * sideC * sideB));
             edgeAB = Math.Acos((sideB * sideB + sideA * sideA - sideC * sideC) / (2 * sideA * sideB));
-            edgeCA = 180 - (edgeBC+ edgeAB);
+            edgeCA = 180 - (edgeBC + edgeAB);
         }
 
         public void printEdgesAndSides()
