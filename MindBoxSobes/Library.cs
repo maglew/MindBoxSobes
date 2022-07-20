@@ -1,9 +1,9 @@
 ﻿namespace MindBoxLib
 {
-    public abstract class Figure
+    public abstract class Figure //абстрактынй класс фигур от которого будут наследоваться остальные
     {
-        public double square;
-        public double perimeter;
+        public double square;//площадь фигуры
+        public double perimeter;//периметр фигуры
 
         public double Square
         {
@@ -17,15 +17,15 @@
             get { return perimeter; }
         }
 
-        public abstract void computeSquare();
-        public abstract void computePerimeter();
-        public abstract void printParams();
+        public abstract void computeSquare();//функция рассчета площади фигуры
+        public abstract void computePerimeter();//функция рассчета периметра фигуры
+        public abstract void printParams();//функция вывода на печать параметров фигуры
 
     }
 
     public class Circle : Figure
     {
-        public double radius;
+        public double radius;//переменная радиуса для окружности
         public double Radius
         {
             set { radius = value; }
@@ -43,12 +43,12 @@
 
         public override void computePerimeter()
         {
-            Perimeter = 2 * Math.PI * Radius;
+            Perimeter = 2 * Math.PI * Radius;//вычисление периметра окружности зная радиус и число пи
         }
 
         public override void computeSquare()
         {
-            Square= Math.PI * Radius * Radius;
+            Square= Math.PI * Radius * Radius;//вычисление площади окружности зная радиус и число пи
         }
 
 
@@ -66,42 +66,30 @@
     public class Triangle : Figure
     {
 
-        /*public enum TriangleType
-        {
-            равносторонний,
-            равнобедренный,
-            острый,
-            прямоугольный,
-            тупой,
-            неравносторонний
-        }*/
-
-        public enum EdgeType
+        public enum EdgeType//тип треугольника в зависимости от его углов
         {
             острый,
             прямоугольный,
             тупой
         }
 
-        public enum SideType
+        public enum SideType//тип треугольника в зависимости от его сторон
         {
             равносторонний,
             равнобедренный,
             разносторонний
         }
 
-        //public TriangleType triType { get; set; }
-
         public EdgeType edgeType { get; set; }
         public SideType sideType { get; set; }
 
-        public double edgeAB {get; set;}
-        public double edgeBC { get; set; }
-        public double edgeCA { get; set; }
+        public double edgeAB {get; set;}//угол AB треугольника(гамма)
+        public double edgeBC { get; set; }//угол ВС треугольника(альфа)
+        public double edgeCA { get; set; }//угол СА треугольника(бэта)
 
-        public double sideA { get; set; }
-        public double sideB { get; set; }
-        public double sideC { get; set; }
+        public double sideA { get; set; }//сторона А треугольника
+        public double sideB { get; set; }//сторона В треугольника
+        public double sideC { get; set; }//сторона С треугольника
 
         public Triangle( double sideA, double sideB, double sideC)
         {
@@ -114,14 +102,14 @@
             computeTriangleType();
             computeSquare();
         }
-        public void computeTriangleEdges()
+        public void computeTriangleEdges()//нахождение углов треугольника зная все стороны
         {
             edgeBC = (180.0 / Math.PI)*Math.Acos((sideB * sideB + sideC * sideC - sideA * sideA) / (2 * sideC * sideB));
             edgeAB = (180.0 / Math.PI)*Math.Acos((sideB * sideB + sideA * sideA - sideC * sideC) / (2 * sideA * sideB));
             edgeCA = 180 - (edgeBC + edgeAB);
         }
 
-        public void computeTriangleType()
+        public void computeTriangleType()//определение типа треугольника зная углы и стороны
         {
             if(edgeBC==90||edgeAB==90||edgeCA==90)
             {
@@ -151,16 +139,16 @@
         }
 
 
-        public override void computePerimeter()
+        public override void computePerimeter()//нахождение периметра треугольника методом сложения сторон
         {
             Perimeter = sideA + sideB + sideC;
         }
 
-        public override void computeSquare()
+        public override void computeSquare()//вычисление площади треугольника формулой Герона(универсальная)
         { 
             Square=Math.Sqrt(0.5*Perimeter*(0.5 * Perimeter - sideA)*(0.5 * Perimeter - sideB)*(0.5 * Perimeter - sideC));
         }
-        public override void printParams()
+        public override void printParams()//вывод параметров треугольника на печать
         {
             Console.WriteLine($"стороны A={sideA}, B={sideB} ,C={sideC}");
             Console.WriteLine($"углы AB={edgeAB}, BC={edgeBC} ,CA={edgeCA}");
