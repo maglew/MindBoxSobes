@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "MindBoxMain": {
+      "commandName": "Project"
+    },
+    "UnitTests": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\vladislav\\source\\repos\\MindBoxSobes\\UnitTests"
+    }
+  }
+}
